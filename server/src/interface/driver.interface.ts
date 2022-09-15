@@ -1,4 +1,4 @@
-interface DriverFormula1 {
+export interface Driver {
   id: number,
   code: string,
   firstname: string,
@@ -6,10 +6,10 @@ interface DriverFormula1 {
   country: string,
   team: string,
   imageUrl: string,
-  place: string,
+  place: number,
 }
 
-interface DriverFromJSON {
+export interface DriverFromJSON {
   id: number,
   code: string,
   firstname: string,
@@ -17,6 +17,3 @@ interface DriverFromJSON {
   country: string,
   team: string,
 }
-
-
-export type Driver = DriverFormula1 | DriverFromJSON;
