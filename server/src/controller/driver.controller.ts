@@ -5,9 +5,15 @@ import { Driver, DriverFromJSON } from '../interface/driver.interface';
 const driverController = (app: express.Application) => {
 
   console.log('Init driver controller...');
-  const formula1Path = './formula1';
+  const formula1Path = './static';
   const formula1PathDriverJson = `${formula1Path}/drivers.json`;
   let drivers: Driver[];
+
+
+
+  app.get('/', async (req: express.Request, res: express.Response) => {
+    res.send('server is ready');
+  })
 
 
   /**
@@ -31,16 +37,11 @@ const driverController = (app: express.Application) => {
           lastname: driver.lastname,
           country: driver.country,
           team: driver.team,
-          imageUrl: `${formula1Path}/${code}.png`,
+          imageUrl: `/static/${code}.png`,
           place: place,
         }
       });
-      res.send({
-        data: {
-          drivers
-        },
-        success: true
-      });
+      res.send(drivers);
     } catch (error) {
       console.error(error);
       res.status(500).send({
@@ -49,7 +50,6 @@ const driverController = (app: express.Application) => {
       });
     }
   });
-
 
   app.post('/drivers/:id/overtake', async (req: express.Request, res: express.Response) => {
     try {
