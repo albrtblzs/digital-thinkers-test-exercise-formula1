@@ -1,0 +1,4 @@
+In this test exercise I build a simple web application using
+Node.js and Express on the server side, and React on the frontend side – all
+written in modern TypeScript. My application will display and mutate
+information of Formula 1 drivers
