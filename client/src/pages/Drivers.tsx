@@ -80,27 +80,24 @@ const Drivers = () => {
     const { data: response } = await axios.get(
       "http://localhost:8080/drivers"
     );
-      console.log(response);
     setArticles(response);
   };
 
   const overTakeDriver = async (driverId: number) => {
-    console.log(overTake);
+
     const { data: response } = await axios.post(
       `http://localhost:8080/drivers/${driverId}/overtake`
     );
-      console.log(response);
     setArticles(response);
   };
 
 
   const dispatch = useDispatch();
 
-  const {overTake} = bindActionCreators(actionCreators, dispatch);
+  bindActionCreators(actionCreators, dispatch);
   
-  const driversInNewPosition = useSelector((state: State) => state.drivers);
+  useSelector((state: State) => state.drivers);
 
-  console.log(driversInNewPosition);
   
   return (
     <Container>
