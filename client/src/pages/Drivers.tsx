@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
+import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators, State } from '../state';
 // import { Link } from "react-router-dom";
 
-interface Driver {
+export interface Driver {
   id: number;
   code: string;
   firstname: string;
@@ -81,7 +84,7 @@ const Drivers = () => {
     setArticles(response);
   };
 
-  const overTake = async (driverId: number) => {
+  const overTakeDriver = async (driverId: number) => {
     console.log(overTake);
     const { data: response } = await axios.post(
       `http://localhost:8080/drivers/${driverId}/overtake`
@@ -90,6 +93,15 @@ const Drivers = () => {
     setArticles(response);
   };
 
+
+  const dispatch = useDispatch();
+
+  const {overTake} = bindActionCreators(actionCreators, dispatch);
+  
+  const driversInNewPosition = useSelector((state: State) => state.drivers);
+
+  console.log(driversInNewPosition);
+  
   return (
     <Container>
       {drivers.length ? (
@@ -103,7 +115,7 @@ const Drivers = () => {
               <Content>{driver.country}</Content>
               <Content>{driver.team}</Content>
               <Content>{driver.place}</Content>
-              <OverTakeButton onClick={async () => await overTake(driver.id)} >Overtake</OverTakeButton>
+              <OverTakeButton onClick={async () => await overTakeDriver(driver.id)} >Overtake</OverTakeButton>
             </Card>
           ))}
         </CardsContainer>
