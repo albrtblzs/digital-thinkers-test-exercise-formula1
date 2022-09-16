@@ -18,15 +18,21 @@ interface Driver {
 const CardsContainer = styled.div`
   padding: 4rem 0;
   display: flex;
+  flex-direction: column;
 `;
 
 const Card = styled.div`
   height: 35rem;
-  width: 50%;
+  width: 30%;
   box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
   padding: 2rem;
   border-radius: 2rem;
   margin-right: 2rem;
+  margin-bottom: 3rem;
+`;
+
+const OverTakeButton = styled.button`
+width: auto;
 `;
 
 const Image = styled.img`
@@ -75,6 +81,15 @@ const Drivers = () => {
     setArticles(response);
   };
 
+  const overTake = async (driverId: number) => {
+    console.log(overTake);
+    const { data: response } = await axios.post(
+      `http://localhost:8080/drivers/${driverId}/overtake`
+    );
+      console.log(response);
+    setArticles(response);
+  };
+
   return (
     <Container>
       {drivers.length ? (
@@ -88,6 +103,7 @@ const Drivers = () => {
               <Content>{driver.country}</Content>
               <Content>{driver.team}</Content>
               <Content>{driver.place}</Content>
+              <OverTakeButton onClick={async () => await overTake(driver.id)} >Overtake</OverTakeButton>
             </Card>
           ))}
         </CardsContainer>

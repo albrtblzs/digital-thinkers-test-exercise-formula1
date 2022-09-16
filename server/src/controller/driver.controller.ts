@@ -61,12 +61,7 @@ const driverController = (app: express.Application) => {
       } 
       console.log('indexof', drivers.indexOf(driver));
       if(driver.place === 1) {
-        res.send({
-          data: {
-            drivers,
-          },
-          success: true
-        });
+        res.send(drivers);
       } else {
         const fastDriverIndex = drivers.indexOf(driver);
         const slowDriverIndex = drivers.indexOf(driver) - 1;
@@ -76,12 +71,7 @@ const driverController = (app: express.Application) => {
 
         [drivers[fastDriverIndex], drivers[slowDriverIndex]] = [drivers[slowDriverIndex], drivers[fastDriverIndex]];
         console.log(drivers);
-        res.send({
-          data: {
-            drivers
-          },
-          success: true
-        });
+        res.send(drivers);
       }
     } catch (error) {
       console.error(error);
