@@ -26,13 +26,12 @@ background-repeat: no-repeat;
 background-size: contain;
 `
 const CardsContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 `;
 
 const CardLeft = styled(motion.div)`
-  height: 8rem;
+  height: 3rem;
   width: 50%;
   box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
   padding: 1rem;
@@ -42,36 +41,38 @@ const CardLeft = styled(motion.div)`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  background-color: #F5F5F5;
 `;
 
 const CardRight = styled(motion.div)`
-  height: 8rem;
+  height: 3rem;
   width: 50%;
   box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
   padding: 1rem;
   border-radius: 2rem;
   margin-right: 2rem;
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin-left: 648px;
+  background-color: #F5F5F5;
+  opacity: 0.5;
 `;
 
 const OverTakeButton = styled.button`
   width: auto;
+  height: 25px;
   border-radius: 2rem;
 `;
 
 const Image = styled.img`
   width: auto;
-  height: 100px;
+  height: 30px;
   border-radius: 2rem;
 `;
 
 const Header = styled.h2`
-  margin-top: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 `;
 
 const NoDriversContainer = styled.div`
@@ -120,7 +121,7 @@ const Drivers = () => {
         <OverTakeButton
         onClick={async () => await overTakeDriver(id)}
       >
-        Overtake
+        <Header>Overtake</Header>
       </OverTakeButton>
       )
     }
