@@ -54,12 +54,12 @@ const driverController = (app: express.Application) => {
   app.post('/drivers/:id/overtake', async (req: express.Request, res: express.Response) => {
     try {
       const driverId = Number(req.params.id);
-      console.log('driverId', driverId);
+
       const driver: Driver | undefined = drivers.find(driver => driver.id === driverId);
       if(!driver) {
         throw new Error('no driver');
       } 
-      console.log('indexof', drivers.indexOf(driver));
+
       if(driver.place === 1) {
         res.send(drivers);
       } else {
@@ -70,7 +70,6 @@ const driverController = (app: express.Application) => {
         drivers[slowDriverIndex].place += 1;
 
         [drivers[fastDriverIndex], drivers[slowDriverIndex]] = [drivers[slowDriverIndex], drivers[fastDriverIndex]];
-        console.log(drivers);
         res.send(drivers);
       }
     } catch (error) {

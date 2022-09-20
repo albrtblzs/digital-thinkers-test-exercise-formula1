@@ -28,28 +28,10 @@ const CardLeft = styled.div`
   height: 8rem;
   width: 50%;
   box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 2rem;
   margin-right: 2rem;
   margin-bottom: 3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-const CardRight = styled.div`
-  height: 8rem;
-  width: 50%;
-  box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  border-radius: 2rem;
-  margin-right: 2rem;
-  margin-bottom: 3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-
-  margin-left: 648px;
 `;
 
 const OverTakeButton = styled.button`
@@ -96,44 +78,36 @@ const Drivers = () => {
   }, []);
 
   const fetchDrivers = async () => {
-<<<<<<< Updated upstream
     const { data: response } = await axios.get(
       "http://localhost:8080/drivers"
     );
-      console.log(response);
-=======
-    const { data: response } = await axios.get("http://localhost:8080/drivers");
->>>>>>> Stashed changes
     setArticles(response);
   };
 
   const overTakeDriver = async (driverId: number) => {
-<<<<<<< Updated upstream
-    console.log(overTake);
-=======
->>>>>>> Stashed changes
+
     const { data: response } = await axios.post(
       `http://localhost:8080/drivers/${driverId}/overtake`
     );
-      console.log(response);
     setArticles(response);
   };
 
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   const {overTake} = bindActionCreators(actionCreators, dispatch);
-  
-  const driversInNewPosition = useSelector((state: State) => state.drivers);
-
-  console.log(driversInNewPosition);
-  
 =======
   bindActionCreators(actionCreators, dispatch);
-
+>>>>>>> master
+  
   useSelector((state: State) => state.drivers);
 
->>>>>>> Stashed changes
+  bindActionCreators(actionCreators, dispatch);
+  
+  useSelector((state: State) => state.drivers);
+
+  
   return (
     <Container>
       {drivers.length ? (
