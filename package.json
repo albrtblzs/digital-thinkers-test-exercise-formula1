@@ -7,7 +7,5 @@
     "dev:client": "cd client && npm run start",
     "dev:server": "cd server && npm run dev"
   },
-  "dependencies": {
-    "framer-motion": "^7.3.6"
-  }
+  "dependencies": {}
 }
