@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../state";
-// import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export interface Driver {
   id: number;
@@ -24,7 +24,7 @@ const CardsContainer = styled.div`
   flex-direction: column;
 `;
 
-const CardLeft = styled.div`
+const CardLeft = styled(motion.div)`
   height: 8rem;
   width: 50%;
   box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
@@ -37,7 +37,7 @@ const CardLeft = styled.div`
   justify-content: space-around;
 `;
 
-const CardRight = styled.div`
+const CardRight = styled(motion.div)`
   height: 8rem;
   width: 50%;
   box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
@@ -48,7 +48,6 @@ const CardRight = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
   margin-left: 648px;
 `;
 
@@ -109,9 +108,8 @@ const Drivers = () => {
 
   const dispatch = useDispatch();
 
-
   bindActionCreators(actionCreators, dispatch);
-  
+
   useSelector((state: State) => state.drivers);
 
   bindActionCreators(actionCreators, dispatch);
@@ -126,24 +124,34 @@ const Drivers = () => {
             if (index % 2 !== 0) {
               console.log(index);
               return (
-                <CardRight key={driver.id}>
-                  <Image src={`http://localhost:8080${driver.imageUrl}`} />
-                  <Header>
-                    {driver.firstname} {driver.lastname}
-                  </Header>
-                  <Header>{driver.country}</Header>
-                  <Header>{driver.team}</Header>
-                  <Header>{driver.place}</Header>
-                  <OverTakeButton
-                    onClick={async () => await overTakeDriver(driver.id)}
-                  >
-                    Overtake
-                  </OverTakeButton>
-                </CardRight>
+                  <CardRight
+                  whileHover={{ scale: 1.2 }} 
+                  initial={{opacity: 0}}
+                  animate={{opacity: 1}}
+                  transition={{delay: 0.3, duration: 0.5}}
+                  key={driver.id}>
+                    <Image src={`http://localhost:8080${driver.imageUrl}`} />
+                    <Header>
+                      {driver.firstname} {driver.lastname}
+                    </Header>
+                    <Header>{driver.country}</Header>
+                    <Header>{driver.team}</Header>
+                    <Header>{driver.place}</Header>
+                    <OverTakeButton
+                      onClick={async () => await overTakeDriver(driver.id)}
+                    >
+                      Overtake
+                    </OverTakeButton>
+                  </CardRight>
               );
             } else {
               return (
-                <CardLeft key={driver.id}>
+                <CardLeft  
+                whileHover={{ scale: 1.2 }} 
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{delay: 0.3, duration: 0.5}}
+                key={driver.id}>
                   <Image src={`http://localhost:8080${driver.imageUrl}`} />
                   <Header>
                     {driver.firstname} {driver.lastname}
