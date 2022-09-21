@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../state";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export interface Driver {
   id: number;
@@ -30,21 +30,7 @@ display: flex;
 flex-direction: column;
 `;
 
-const CardLeft = styled(motion.div)`
-  height: 3rem;
-  width: 50%;
-  box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  border-radius: 2rem;
-  margin-right: 2rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-color: #F5F5F5;
-`;
-
-const CardRight = styled(motion.div)`
+const Card = styled(motion.div)`
   height: 3rem;
   width: 50%;
   box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
@@ -54,15 +40,17 @@ const CardRight = styled(motion.div)`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-left: 648px;
   background-color: #F5F5F5;
-  opacity: 0.5;
 `;
 
 const OverTakeButton = styled.button`
   width: auto;
-  height: 25px;
+  height: 100%;
   border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 `;
 
 const Image = styled.img`
@@ -121,7 +109,7 @@ const Drivers = () => {
         <OverTakeButton
         onClick={async () => await overTakeDriver(id)}
       >
-        <Header>Overtake</Header>
+        <p style={{margin: 0}}>Overtake</p>
       </OverTakeButton>
       )
     }
@@ -137,54 +125,34 @@ const Drivers = () => {
 
   useSelector((state: State) => state.drivers);
 
+
   return (
     <PageBackground>      
     <Container>
       {drivers.length ? (
         <CardsContainer>
+          <AnimatePresence>
           {drivers.map((driver, index) => {
-            if (index % 2 !== 0) {
-              console.log(index);
-              return (
-                <CardRight
-                  whileHover={{ scale: 1.2 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  key={driver.id}
-                >
-                  <Header>{driver.place}</Header>
-                  <Image src={`http://localhost:8080${driver.imageUrl}`} />
-                  <Header>
-                    {driver.firstname} {driver.lastname}
-                  </Header>
-                  <Header>{driver.country}</Header>
-                  <Header>{driver.team}</Header>
-                  
-                {buttonDisplay(index, driver.id)}
-                </CardRight>
-              );
-            } else {
-              return (
-                <CardLeft
-                  whileHover={{ scale: 1.2 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  key={driver.id}
-                >
-                  <Header>{driver.place}</Header>
-                  <Image src={`http://localhost:8080${driver.imageUrl}`} />
-                  <Header>
-                    {driver.firstname} {driver.lastname}
-                  </Header>
-                  <Header>{driver.country}</Header>
-                  <Header>{driver.team}</Header>
-                  {buttonDisplay(index, driver.id)}
-                </CardLeft>
-              );
-            }
+            const marginLeft = index % 2 !== 0 ? 648 : 0;
+            return (
+              <Card style={{marginLeft: marginLeft}}
+                // whileHover={{ scale: 1.2 }}
+                layout
+                key={driver.id}
+              >
+                <Header>{driver.place}</Header>
+                <Image src={`http://localhost:8080${driver.imageUrl}`} />
+                <Header>
+                  {driver.firstname} {driver.lastname}
+                </Header>
+                <Header>{driver.country}</Header>
+                <Header>{driver.team}</Header>
+                
+              {buttonDisplay(index, driver.id)}
+              </Card>
+            );
           })}
+          </AnimatePresence>
         </CardsContainer>
       ) : (
         <NoDriversContainer>
