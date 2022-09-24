@@ -23,7 +23,7 @@ const backgroundImage = `url("http://localhost:8080/static/foruma-one-background
 const PageBackground = styled.div`
 background-image: ${backgroundImage};
 background-repeat: no-repeat;
-background-size: contain;
+background-size: cover;
 `
 const CardsContainer = styled.div`
 display: flex;
