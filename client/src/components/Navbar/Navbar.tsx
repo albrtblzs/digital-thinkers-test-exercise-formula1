@@ -1,4 +1,4 @@
-import { Navbar, NavItem } from "react-bootstrap";
+import { Navbar, NavItem, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
@@ -7,12 +7,17 @@ import { Link } from "react-router-dom";
 const Nav = () => {
 
   return (
-    <Navbar>
-      <NavItem>
-        <Link to="/" className="nav-link">
+    <Navbar bg="dark" variant="dark">
+    <Container>
+      <NavItem style={{display: "flex"}}>
+        <Link to="/" className="nav-link" style={{color: 'white'}}>
           Home
         </Link>
+        <Link to="/drivers" className="nav-link" style={{color: 'white'}}>
+          Drivers
+        </Link>
       </NavItem>
+    </Container>
     </Navbar>
   );
 };

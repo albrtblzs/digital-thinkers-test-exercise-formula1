@@ -28,6 +28,9 @@ background-size: cover;
 const CardsContainer = styled.div`
 display: flex;
 flex-direction: column;
+justify-content: space-evenly;
+padding-top: 20px;
+padding-bottom: 20px;
 `;
 
 const Card = styled(motion.div)`
@@ -112,7 +115,7 @@ const Drivers = () => {
         <p style={{margin: 0}}>Overtake</p>
       </OverTakeButton>
       )
-    }
+    } 
   }
 
   const dispatch = useDispatch();
