@@ -37,7 +37,7 @@ const driverController = (app: express.Application) => {
           lastname: driver.lastname,
           country: driver.country,
           team: driver.team,
-          imageUrl: `/static/${code}.png`,
+          imageUrl: `/static/${code.toLowerCase()}.png`,
           place: place,
         }
       });

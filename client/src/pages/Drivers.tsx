@@ -28,7 +28,6 @@ background-size: cover;
 const CardsContainer = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: space-evenly;
 padding-top: 20px;
 padding-bottom: 20px;
 `;
@@ -42,7 +41,7 @@ const Card = styled(motion.div)`
   margin-right: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #F5F5F5;
 `;
 
@@ -139,7 +138,7 @@ const Drivers = () => {
             const marginLeft = index % 2 !== 0 ? 648 : 0;
             return (
               <Card style={{marginLeft: marginLeft}}
-                // whileHover={{ scale: 1.2 }}
+                whileHover={{ scale: 1.2 }}
                 layout
                 key={driver.id}
               >
