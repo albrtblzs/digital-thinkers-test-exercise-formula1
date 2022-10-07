@@ -93,40 +93,36 @@ const Drivers = () => {
   }, []);
 
   const fetchDrivers = async () => {
-    const { data: response } = await axios.get("http://localhost:8080/drivers");
+    const { data: response } = await axios.get("http://192.168.43.237:8080/drivers");
     setArticles(response);
   };
 
-  const overTakeDriver = async (driverId: number) => {
-    const { data: response } = await axios.post(
-      `http://localhost:8080/drivers/${driverId}/overtake`
-    );
-    setArticles(response);
-  };
+  // const overTakeDriver = async (driverId: number) => {
+  //   const { data: response } = await axios.post(
+  //     `http://localhost:8080/drivers/${driverId}/overtake`
+  //   );
+  //   // setArticles(response);
+  // };
 
+
+  const dispatch = useDispatch();
+
+  const {overTake} = bindActionCreators(actionCreators, dispatch);
+
+  const driversState = useSelector((state: State) => state.drivers);
+  console.log(driversState);
 
   const buttonDisplay = (place: number, id: number) => {
     if(place > 0) {
       return (
         <OverTakeButton
-        onClick={async () => await overTakeDriver(id)}
+        onClick={async () => overTake(id)}
       >
         <p style={{margin: 0}}>Overtake</p>
       </OverTakeButton>
       )
     } 
   }
-
-  const dispatch = useDispatch();
-
-  bindActionCreators(actionCreators, dispatch);
-
-  useSelector((state: State) => state.drivers);
-
-  bindActionCreators(actionCreators, dispatch);
-
-  useSelector((state: State) => state.drivers);
-
 
   return (
     <PageBackground>      
@@ -143,7 +139,7 @@ const Drivers = () => {
                 key={driver.id}
               >
                 <Header>{driver.place}</Header>
-                <Image src={`http://localhost:8080${driver.imageUrl}`} />
+                <Image src={`http://192.168.43.237:8080${driver.imageUrl}`} />
                 <Header>
                   {driver.firstname} {driver.lastname}
                 </Header>
